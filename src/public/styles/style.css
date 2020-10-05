@@ -1,0 +1,25 @@
+body {
+    height: 100vh;
+    background-color: mintcream;
+}
+.df {
+    display: flex;
+    height: 100vh;
+}
+.fd-c {
+    flex-direction: column;
+}
+
+.jc-spb {
+    justify-content: space-between;
+}
+
+.brad-8 {
+    border-radius: 8px;
+}
+
+/* background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db) */
+/* background: linear-gradient(90deg, #aea4e3, #d3ffe8); */
+/* background: linear-gradient(#c6e4ee 0%, #c6e4ee 40%, #fed1ae 60%, #faa0b9 70%, #cb7dcb 80%, #757ecb 100%) */
+/* background:linear-gradient(to left bottom, rgb(118, 196, 226), rgb(129, 118, 181)); */
+/* background:linear-gradient(rgb(17, 43, 77), rgb(120, 107, 175)); */
