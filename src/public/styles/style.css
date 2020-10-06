@@ -4,7 +4,7 @@ body {
 }
 .df {
     display: flex;
-    height: 100vh;
+    /* height: 100vh; */
 }
 .fd-c {
     flex-direction: column;
@@ -16,6 +16,31 @@ body {
 
 .brad-8 {
     border-radius: 8px;
+}
+
+.bg-grad {
+    background: linear-gradient(rgb(17, 43, 77), rgb(120, 107, 175));
+}
+
+.p-8 {
+    padding: 8px !important;
+}
+
+.p-fix {
+    position: fixed;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.max-h {
+    max-height: 89vh;
+    overflow-y: scroll;
 }
 
 /* background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db) */

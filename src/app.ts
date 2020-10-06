@@ -8,11 +8,6 @@ import settings from "./settings"
 import router from "./router"
 
 settings.envconf()
-// const server = http.createServer(app.callback())
-// const io = new socket(server)
-// io.on('connection', function(socket){
-//     console.log('a user connected')
-// })
 
 const app: Koa = new Koa()
 const server = http.createServer(app.callback())
@@ -21,6 +16,7 @@ const io = socketIO(server)
 io.on("connection", (socket) => {
     socket.on("newMsg", (msg) => {
         console.log("got new message: ", msg)
+        io.emit("addMsg", { msg, user: "u know" })
     })
 })
 

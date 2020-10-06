@@ -1,9 +1,5 @@
 import * as Koa from "koa"
 
-const test = async (ctx: Koa.Context) => {
-    await ctx.render("commonRoom")
-}
-
 const signup = async (ctx: Koa.Context) => {
     await ctx.render("signup")
 }
@@ -14,7 +10,7 @@ const signin = async (ctx: Koa.Context) => {
 }
 
 const commonRoom = async (ctx: Koa.Context) => {
-    await ctx.render("common room")
+    await ctx.render("room")
 }
 
-export default { test, signin, signup, commonRoom }
+export default { signin, signup, commonRoom }

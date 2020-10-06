@@ -16,8 +16,8 @@
         "target": "es5",
         "noEmitOnError": true,
         "strictNullChecks": true, // set false if needed
-        "noUnusedLocals": true,
-        "noImplicitReturns": true,
+        "noUnusedLocals": false,
+        "noImplicitReturns": false,
         "lib": ["ES2015"],
         "outDir": "dist",
         "emitDecoratorMetadata": true,
