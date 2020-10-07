@@ -1,5 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
+    path = window.location.pathname
+
     /* --- Auth ---- */
+    if (path === "/signup" || path === "/signin") {
+        const inputs = [...document.querySelectorAll("input")]
+        inputs.forEach((input) => {
+            label = input.nextElementSibling
+            input.addEventListener("focus", function() {
+                console.log(1)
+                label.style.opacity = 0
+            })
+            input.addEventListener("blur", function() {
+                label.style.opacity = 1
+            })
+        })
+    }
+    /* Chat room */
+    else {
+        const socket = io()
+        const inpMessage = document.querySelector("#inp-message")
+        const btn = document.querySelector("#btn-send")
+        label = document.querySelector("#placeholder")
+
+        inpMessage.addEventListener("focus", function() {
+            label.style.opacity = 0
+        })
+
+        inpMessage.addEventListener("blur", function() {
+            label.style.opacity = 1
+        })
+
+        btn.addEventListener("click", function(e) {
+            e.preventDefault()
+            const msg = inpMessage.value.trim()
+            if (msg === "") return
+            socket.emit("newMsg", msg)
+            inpMessage.value = ""
+        })
+
+        socket.on("addMsg", function(data) {
+            card = createMessageCard(data)
+            addMessageCard(card)
+        })
+    }
 
     // signup request
     /* 
@@ -14,31 +57,42 @@ document.addEventListener("DOMContentLoaded", function () {
     3. enter (or not)
     */
 
-    const socket = io()
-    const inpMessage = document.querySelector("#inp-message")
-    const btn = document.querySelector("#btn-send")
-    label = document.querySelector("#placeholder")
+    // const socket = io()
+    // const inpMessage = document.querySelector("#inp-message")
+    // const inputs = [...document.querySelectorAll("input")]
+    // const btn = document.querySelector("#btn-send")
+    // label = document.querySelector("#placeholder")
 
-    inpMessage.addEventListener("focus", function () {
-        label.style.opacity = 0
-    })
+    // inpMessage.addEventListener("focus", function () {
+    //     label.style.opacity = 0
+    // })
 
-    inpMessage.addEventListener("blur", function () {
-        label.style.opacity = 1
-    })
+    // inpMessage.addEventListener("blur", function () {
+    //     label.style.opacity = 1
+    // })
 
-    btn.addEventListener("click", function (e) {
-        e.preventDefault()
-        const msg = inpMessage.value.trim()
-        if (msg === "") return
-        socket.emit("newMsg", msg)
-        inpMessage.value = ""
-    })
+    // btn.addEventListener("click", function (e) {
+    //     e.preventDefault()
+    //     const msg = inpMessage.value.trim()
+    //     if (msg === "") return
+    //     socket.emit("newMsg", msg)
+    //     inpMessage.value = ""
+    // })
 
-    socket.on("addMsg", function (data) {
-        card = createMessageCard(data)
-        addMessageCard(card)
-    })
+    // socket.on("addMsg", function (data) {
+    //     card = createMessageCard(data)
+    //     addMessageCard(card)
+    // })
+
+    // inputs.forEach((input) => {
+    //     label = input.nextElementSibling
+    //     input.addEventListener("focus", function () {
+    //         label.style.opacity = 0
+    //     })
+    //     input.addEventListener("blur", function () {
+    //         label.style.opacity = 1
+    //     })
+    // })
 })
 
 function createMessageCard(data) {

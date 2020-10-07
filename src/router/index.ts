@@ -7,4 +7,8 @@ router.get("/signup", controllers.signup)
 router.get("/signin", controllers.signin)
 router.get("/", controllers.commonRoom)
 
+
+router.post("/signup", controllers.postSignup)
+router.post("/signin", controllers.postSignin)
+
 export default router
