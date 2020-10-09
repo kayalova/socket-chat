@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv"
 import * as path from "path"
-import { User } from '../models/User'
+import { User } from "../models/User"
 import { ConnectionOptions } from "typeorm"
 
 export const envconf = (): void => {

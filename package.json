@@ -20,6 +20,7 @@
     },
     "homepage": "https://github.com/kayalova/socket-chat#readme",
     "dependencies": {
+        "crypto": "^1.0.1",
         "dotenv": "^8.2.0",
         "koa": "^2.13.0",
         "koa-bodyparser-ts": "^0.3.1",
