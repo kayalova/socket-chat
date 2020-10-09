@@ -1,55 +1,46 @@
 import * as Koa from "koa"
-import db from "../db"
+import * as db from "../db"
+import { User } from '../models/User'
+
+const getSignupPage = async (ctx: Koa.Context) => ctx.render("signup")
+const getSigninPage = async (ctx: Koa.Context) => ctx.render("signin")
+const getRoom = async (ctx: Koa.Context) => ctx.render("room")
 
 const signup = async (ctx: Koa.Context) => {
-    await ctx.render("signup")
-}
-
-const signin = async (ctx: Koa.Context) => {
-    await ctx.render("signin")
-}
-
-const commonRoom = async (ctx: Koa.Context) => {
-    await ctx.render("room")
-
-}
-const postSignup = async (ctx: Koa.Context) => {
     const { name, email, password, } = ctx.request.body
-    const { rows } = await db.pool.query('SELECT * FROM users WHERE email=$1', [email])
-    if (rows.length) {
+    const connection = await db.openConnection()
+    const repository = connection.getRepository(User)
+    const [_, count] = await repository.findAndCount({ email })
+    if (count) {
         ctx.body = "User with such email already registered"
+        connection.close()
         return
     }
-
-    //hash password before
-    const { rowCount } = await db.pool.query("INSERT INTO users(name, email, password) VALUES($1, $2, $3)", [name, email, password])
-    if (rowCount == 1) {
-        ctx.redirect('/')
-        ctx.body = { name }
-        return
-
-    }
-
-    ctx.response.status = 500
-    ctx.body = "Some error on server ah"
+    // TODO: hash password
+    const newUser = new User(name, email, password)
+    await repository.save(newUser)
+    connection.close()
+    ctx.redirect('/')
+    ctx.body = { name }
     return
 
 }
 
-const postSignin = async (ctx: Koa.Context) => {
+const signin = async (ctx: Koa.Context) => {
     const { email, password, } = ctx.request.body
-    const { rows } = await db.pool.query('SELECT * FROM users WHERE email=$1 and password=$2', [email, password])
-    if (!rows.length) {
+    //TODO: hash password
+    const connection = await db.openConnection()
+    const repository = connection.getRepository(User)
+    const user = await repository.findOne({ email, password })
+    await connection.close()
+    if (!user) {
         ctx.response.status = 400
         ctx.body = "Invalid user or password"
         return
     }
-
     ctx.redirect('/')
-    ctx.body = { email }
-
-
+    ctx.body = { name: user.name }
 }
 
 
-export default { signin, signup, commonRoom, postSignup, postSignin }
+export default { getSigninPage, getSignupPage, getRoom, signup, signin }

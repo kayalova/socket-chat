@@ -3,12 +3,12 @@ import controllers from "../controllers"
 
 const router = new Router()
 
-router.get("/signup", controllers.signup)
-router.get("/signin", controllers.signin)
-router.get("/", controllers.commonRoom)
+router.get("/signup", controllers.getSigninPage)
+router.get("/signin", controllers.getSignupPage)
+router.get("/", controllers.getRoom)
 
 
-router.post("/signup", controllers.postSignup)
-router.post("/signin", controllers.postSignin)
+router.post("/signup", controllers.signup)
+router.post("/signin", controllers.signin)
 
 export default router

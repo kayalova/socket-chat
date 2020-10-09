@@ -12,7 +12,6 @@ import router from "./router"
 settings.envconf()
 
 const app: Koa = new Koa()
-
 const server = http.createServer(app.callback())
 const io = socketIO(server)
 
@@ -30,7 +29,6 @@ render(app, {
     cache: false,
     debug: false,
 })
-
 
 app.use(serve(path.join(__dirname, "public")))
 app.use(bodyParser())

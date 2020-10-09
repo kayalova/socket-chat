@@ -8,7 +8,6 @@
 //         "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
 //     }
 // }
-
 {
     "compilerOptions": {
         "module": "commonjs",
@@ -18,11 +17,16 @@
         "strictNullChecks": true, // set false if needed
         "noUnusedLocals": false,
         "noImplicitReturns": false,
-        "lib": ["ES2015"],
+        "lib": [
+            "ES2015"
+        ],
         "outDir": "dist",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "strictPropertyInitialization": false
     },
-    "include": ["src/**/*"]
+    "include": [
+        "src/**/*"
+    ]
 }
