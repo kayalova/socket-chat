@@ -1,97 +1,68 @@
-<div class="container valign-wrapper df">
-    <div class="row">
-        <div class="col s12 l6 offset-l3 white-text card brad-8">
-            <div class="col s12 center">
-                <h1 class="text-center teal-text light">
-                    <small>Sign up</small>
-                </h1>
-            </div>
-            <div class="divider"></div>
-            <div class="input-field col s12">
-                <i class="material-icons prefix teal-text">person</i>
-                <input
-                    id="full-name"
-                    name="name"
-                    type="text"
-                    class="teal-text"
-                    required=""
-                    aria-required="true"
-                />
-                <label for="full-name">Name</label>
-            </div>
+<form action="" id="form-signup">
 
-            <div class="input-field col s12">
-                <i class="material-icons prefix teal-text">email</i>
-                <input
-                    id="email"
-                    name="name"
-                    type="text"
-                    class="teal-text"
-                    required=""
-                    aria-required="true"
-                />
-                <label for="email">Email</label>
-            </div>
+    <div class="container valign-wrapper df">
+        <div class="row">
+            <div class="col s12 l6 offset-l3 white-text card brad-8">
+                <div class="col s12 center">
+                    <h1 class="text-center teal-text light">
+                        <small>Sign up</small>
+                    </h1>
+                </div>
+                <div class="divider"></div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix teal-text">person</i>
+                    <input id="full-name" name="name" type="text" class="teal-text" required="" aria-required="true" />
+                    <label for="full-name">Name</label>
+                </div>
 
-            <div class="input-field col s12">
-                <i class="material-icons prefix teal-text">https</i>
-                <input
-                    id="password"
-                    name="name"
-                    type="text"
-                    class="teal-text"
-                    required=""
-                    aria-required="true"
-                />
-                <label for="email">Password</label>
-            </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix teal-text">email</i>
+                    <input id="email" name="name" type="text" class="teal-text" required="" aria-required="true" />
+                    <label for="email">Email</label>
+                </div>
 
-            <div class="col s12">&nbsp;</div>
-            <div class="row">
-                <div class="col s12">
-                    <div class="col s4 teal-text gender">
-                        <div class="left">
-                            <i class="material-icons small">wc</i>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix teal-text">https</i>
+                    <input id="password" name="name" type="text" class="teal-text" required="" aria-required="true" />
+                    <label for="email">Password</label>
+                </div>
+
+                <div class="col s12">&nbsp;</div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col s4 teal-text gender">
+                            <div class="left">
+                                <i class="material-icons small">wc</i>
+                            </div>
+                            <duv class="left"> &nbsp; &nbsp; Gender</duv>
                         </div>
-                        <duv class="left"> &nbsp; &nbsp; Gender</duv>
-                    </div>
-                    <div class="col s4 center">
-                        <label>
-                            <input
-                                id="female"
-                                checked="checked"
-                                name="gender1"
-                                class="with-gap"
-                                type="radio"
-                            />
-                            <span>Female</span>
-                        </label>
-                    </div>
-                    <div class="col s4 center">
-                        <label>
-                            <input
-                                id="male"
-                                name="gender1"
-                                class="with-gap"
-                                type="radio"
-                            />
-                            <span>Male</span>
-                        </label>
+                        <div class="col s4 center">
+                            <label>
+                                <input id="female" checked="checked" name="gender1" class="with-gap" type="radio" />
+                                <span>Female</span>
+                            </label>
+                        </div>
+                        <div class="col s4 center">
+                            <label>
+                                <input id="male" name="gender1" class="with-gap" type="radio" />
+                                <span>Male</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
+
+                <div class="col s12">&nbsp;</div>
+                <div class="col s12 center">
+                    <button type="Submit" class="col s12 btn hoverable">
+                        Submit
+                    </button>
+                </div>
+                <div class="col s12">&nbsp;</div>
+
+                <div class="col s12">&nbsp;</div>
+                <span>Or <a href="/signin">signin</a></span>
+                <div class="col s12">&nbsp;</div>
             </div>
-
-            <div class="col s12">&nbsp;</div>
-            <div class="col s12 center">
-                <button type="Submit" class="col s12 btn hoverable">
-                    Submit
-                </button>
-            </div>
-            <div class="col s12">&nbsp;</div>
-
-            <div class="col s12">&nbsp;</div>
-
-            <div class="col s12">&nbsp;</div>
         </div>
     </div>
-</div>
+</form>

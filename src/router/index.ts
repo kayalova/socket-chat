@@ -3,8 +3,8 @@ import controllers from "../controllers"
 
 const router = new Router()
 
-router.get("/signup", controllers.getSigninPage)
-router.get("/signin", controllers.getSignupPage)
+router.get("/signup", controllers.getSignupPage)
+router.get("/signin", controllers.getSigninPage)
 router.get("/", controllers.getRoom)
 
 router.post("/signup", controllers.signup)
