@@ -35,4 +35,5 @@ app.use(bodyParser())
 app.use(logger())
 app.use(router.routes())
 app.use(router.allowedMethods())
-server.listen(Number(process.env.PORT), () => console.log("server started!"))
+
+server.listen(process.env.PORT, () => console.log(`server started on port ${process.env.PORT}`))

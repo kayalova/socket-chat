@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
     else if (path === "/signup") {
         toggleLabelStyles()
         const formSignup = document.querySelector("#form-signup")
-        console.log(formSignup)
         formSignup.addEventListener("submit", signup)
     }
     else {
@@ -46,46 +45,73 @@ document.addEventListener("DOMContentLoaded", function() {
 
 })
 
-function signup() {
+const searchURLParams = (params) => {
+    return Object.keys(params).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+    }).join('&')
+}
+
+
+function signup(e) {
+    e.preventDefault()
     const name = document.querySelector("#full-name").value || "Anonymous"
     const email = document.querySelector("#email").value
     const password = document.querySelector("#password").value
     if (!areValidFilelds(email, password)) return
+
+    const params = searchURLParams({ name, email, password })
     fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify({ name, email, password }),
+        body: params,
     })
         .then((res) => {
-            // if (!res.ok) alert("Sorry")
+            if (!res.ok) alert("User with such email already registered")
+            return res.json()
+        })
+        .then(({ name }) => redirectOnChatRoom(name))
+        .catch(err => console.log(JSON.stringify(err)))
+}
+
+function redirectOnChatRoom(name) {
+    fetch(`http://localhost:3000?name=${name}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+    })
+        .then((res) => {
+            if (!res.ok) alert("something went wrong")
             return res.json()
         })
         .then(data => console.log(data))
         .catch(err => console.log(err))
 }
+
 
 function signin() {
+    e.preventDefault()
     const email = document.querySelector("#email").value
     const password = document.querySelector("#password").value
-
     if (!areValidFilelds(email, password)) return
-    console.log(areValidFilelds(email, password))
+
+    const params = searchURLParams({ name, email, password })
+
     fetch("http://localhost:3000/signin", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
+        body: params
     })
         .then((res) => {
-            console.log(2)
-            if (!res.ok) alert("Invalid data")
+            if (!res.ok) alert("Wrong email or password")
             return res.json()
         })
-        .then(data => console.log(data))
+        .then(data => {
+            redirectOnChatRoom()
+        })
         .catch(err => console.log(err))
 }
-
-
 
 function areValidFilelds(...values) {
     return values.reduce((res, val) => {

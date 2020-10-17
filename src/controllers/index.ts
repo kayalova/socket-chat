@@ -1,12 +1,17 @@
 import * as Koa from "koa"
-import { stringify } from "querystring"
+import { UserService } from '../services/UserService'
 import * as db from "../db"
 import { User } from "../models/User"
+import { ResponseError } from '../models/ResponseError'
 import * as utils from "../utils"
 
 const getSignupPage = async (ctx: Koa.Context) => ctx.render("signup")
 const getSigninPage = async (ctx: Koa.Context) => ctx.render("signin")
-const getRoom = async (ctx: Koa.Context) => ctx.render("room")
+const getRoom = async (ctx: Koa.Context) => {
+	console.log('hello')
+	const name = ctx.request.body.name || "Anonymous"
+	return ctx.render("room")
+}
 
 const dropTable = async (ctx: Koa.Context) => {
 	const conn = await db.openConnection()
@@ -17,39 +22,23 @@ const dropTable = async (ctx: Koa.Context) => {
 
 const signup = async (ctx: Koa.Context) => {
 	const { name, email, password } = ctx.request.body
-	// const connection = await db.openConnection()
-	// const repository = connection.getRepository(User)
-	// const [_, count] = await repository.findAndCount({ email })
-	// if (count) {
-	// 	ctx.body = "User with such email already registered"
-	// 	connection.close()
-	// 	return
-	// }
-	console.log("password: ", password)
-	// const hashedPassword = utils.hashPassword(password)
-	// const newUser = new User(name, email, hashedPassword)
-	// await repository.save(newUser)
-	// connection.close()
-	// ctx.redirect("/")
-	// ctx.body = { name }
-	return
+
+	const isExists = await UserService.isExists(email)
+	if (isExists) return new ResponseError("User with such email already registered", 400)
+
+
+	await UserService.create(name, email, password)
+
+	ctx.body = { name }
+	ctx.status = 201
 }
 
 const signin = async (ctx: Koa.Context) => {
 	const { email, password } = ctx.request.body
-	const hashedPassword: string = utils.hashPassword(password)
-	const connection = await db.openConnection()
-	const repository = connection.getRepository(User)
 
-	const user = await repository.findOne({ email, password: hashedPassword })
-	await connection.close()
+	const user = await UserService.find(email, password)
+	if (!user) return new ResponseError("Invalid email or password", 400)
 
-	if (!user) {
-		ctx.response.status = 400
-		ctx.body = "Invalid email or password"
-		return
-	}
-	ctx.redirect("/")
 	ctx.body = { name: user.name }
 }
 
